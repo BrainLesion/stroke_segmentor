@@ -66,10 +66,10 @@ please specify your docker version, You can find it by running:
 docker --version
 ```
 
-### Version of !PACKAGE_NAME! ?
-please specify your version of !PACKAGE_NAME! (please make sure you run the latest version):
+### Version of !stroke_segmentor! ?
+please specify your version of !stroke_segmentor! (please make sure you run the latest version):
 ```sh
-pip freeze | grep !PACKAGE_NAME!
+pip freeze | grep !stroke_segmentor!
 ```
 
 **Additional context**
