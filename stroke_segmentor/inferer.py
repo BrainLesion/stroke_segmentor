@@ -1,10 +1,13 @@
-from pathlib import Path
-from typing import Optional
+from __future__ import annotations
 
-import SimpleITK
+from pathlib import Path
+from typing import Optional, Union
+
 import numpy as np
-from stroke_segmentor.model_handler import ModelHandler
+import SimpleITK
 from numpy.typing import NDArray
+
+from stroke_segmentor.model_handler import ModelHandler
 
 
 class Inferer:
@@ -18,9 +21,9 @@ class Inferer:
 
     def _save(
         self,
-        dwi_path: str | Path,
+        dwi_path: Union[str, Path],
         prediction: NDArray,
-        segmentation_path: str | Path,
+        segmentation_path: Union[str, Path],
     ) -> None:
         """Save the prediction as a SimpleITK image.
 
@@ -52,9 +55,9 @@ class Inferer:
 
     def infer(
         self,
-        adc_path: str | Path,
-        dwi_path: str | Path,
-        segmentation_path: Optional[str | Path] = None,
+        adc_path: Union[str, Path],
+        dwi_path: Union[str, Path],
+        segmentation_path: Optional[Union[str, Path]] = None,
     ) -> NDArray:
         """Run inference on the provided ADC and DWI images.
 

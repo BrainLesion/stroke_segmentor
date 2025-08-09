@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Union
 
 import numpy as np
 import torch
@@ -66,7 +67,9 @@ class ModelHandler:
         )
 
     def _get_data_loader(
-        self, adc_path: str | Path, dwi_path: str | Path
+        self,
+        adc_path: Union[str, Path],
+        dwi_path: Union[str, Path],
     ) -> DataLoader:
         """Get the data loader for the input data.
 
@@ -94,8 +97,8 @@ class ModelHandler:
 
     def infer(
         self,
-        adc_path: str | Path,
-        dwi_path: str | Path,
+        adc_path: Union[str, Path],
+        dwi_path: Union[str, Path],
     ) -> NDArray:
         """Run inference on the provided ADC and DWI images.
 
