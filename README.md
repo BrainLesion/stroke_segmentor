@@ -1,14 +1,13 @@
-# stroke_segmentor
+# Stroke Segmentor
 
 [![Python Versions](https://img.shields.io/pypi/pyversions/stroke_segmentor)](https://pypi.org/project/stroke_segmentor/)
 [![Stable Version](https://img.shields.io/pypi/v/stroke_segmentor?label=stable)](https://pypi.python.org/pypi/stroke_segmentor/)
 [![Documentation Status](https://readthedocs.org/projects/stroke_segmentor/badge/?version=latest)](http://stroke_segmentor.readthedocs.io/?badge=latest)
 [![tests](https://github.com/BrainLesion/stroke_segmentor/actions/workflows/tests.yml/badge.svg)](https://github.com/BrainLesion/stroke_segmentor/actions/workflows/tests.yml)
-[![codecov](https://codecov.io/gh/BrainLesion/stroke_segmentor/graph/badge.svg?token=A7FWUKO9Y4)](https://codecov.io/gh/BrainLesion/stroke_segmentor)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+<!-- [![codecov](https://codecov.io/gh/BrainLesion/stroke_segmentor/graph/badge.svg?token=A7FWUKO9Y4)](https://codecov.io/gh/BrainLesion/stroke_segmentor) -->
 
-Description 
-## Features
+State-of-the-art ischemic stroke lesion segmentation in MRI
 
 
 ## Installation
@@ -25,19 +24,23 @@ pip install stroke_segmentor
 A minimal example to create a segmentation could look like this:
 
 ```python
-    # example
+from stroke_segmentor.inferer import Inferer
+
+inferer = Inferer()
+pred = inferer.infer(
+    dwi_path="path/to/dwi.nii.gz",
+    adc_path="path/to/adc.nii.gz",
+    segmentation_path="seg.nii.gz", # optional. the numpy array is always returned for direct usage
+)
 ```
-
-<!-- For more examples and details please refer to our extensive Notebook tutorials here [NBViewer](https://nbviewer.org/github/BrainLesion/tutorials/blob/main/stroke_segmentor/tutorial.ipynb) ([GitHub](https://github.com/BrainLesion/tutorials/blob/main/stroke_segmentor/tutorial.ipynb)). For the best experience open the notebook in Colab. -->
-
 
 ## Citation
 
-If you use stroke_segmentor in your research, please cite it to support the development!
+`stroke_segmentor` is part of the [BrainLesion](https://github.com/BrainLesion) suite.  
+Please cite it support the development!  
+https://github.com/BrainLesion#-citing-brainlesion-suite
 
-```
-TODO: citation will be added asap
-```
+ > TODO: citations for deep isles and NVAUTO
 
 ## Contributing
 
