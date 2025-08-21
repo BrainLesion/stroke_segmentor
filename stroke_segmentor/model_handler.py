@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Union
+from typing import Any, Dict, List, Union
 
 import numpy as np
 import torch
@@ -22,11 +22,13 @@ from monai.transforms.utility.dictionary import (
 from numpy.typing import NDArray
 from torch.amp.autocast_mode import autocast
 
+from stroke_segmentor.zenodo import fetch_weights
+
 
 class ModelHandler:
     """Class for model loading, inference and post processing"""
 
-    def __init__(self, device: str) -> "ModelHandler":
+    def __init__(self, device: str):
         """Initialize the ModelHandler class.
 
         Args:
@@ -38,11 +40,9 @@ class ModelHandler:
 
         self.device = torch.device(device)
         # get location of model weights
-        self.model_weights_folder = Path(
-            "/home/marcelrosier/stroke_segmentor/NVAUTO"
-        )  # check_weights_path()# TODO zenodo download logic
+        self.model_weights_folder = fetch_weights()
         self.checkpoints = [
-            self.model_weights_folder / "ts" / f"model{i}.ts" for i in range(15)
+            self.model_weights_folder / f"model{i}.ts" for i in range(15)
         ]
 
         self.transforms = self._get_transforms()
@@ -120,43 +120,45 @@ class ModelHandler:
         )
 
         with torch.no_grad():
-            for idx, batch_data in enumerate(dataloader):
-                image = batch_data["image"].cuda(0)
+            batch_data: Dict[str, Any] = next(iter(dataloader))
+            image = batch_data["image"].cuda(0)
 
-                all_probs = []
-                for checkpoint in self.checkpoints:
+            all_probs = []
+            for checkpoint in self.checkpoints:
 
-                    model = torch.jit.load(checkpoint)
-                    model.cuda(0)
-                    model.eval()
+                model = torch.jit.load(checkpoint)
+                model.cuda(0)
+                model.eval()
 
-                    with autocast("cuda", enabled=True):
-                        logits = model_inferer(inputs=image, network=model)
+                with autocast("cuda", enabled=True):
+                    logits = model_inferer(inputs=image, network=model)
 
-                    probs = torch.softmax(logits.float(), dim=1)
+                assert isinstance(logits, torch.Tensor)
 
-                    batch_data["pred"] = probs
-                    inverter = Invertd(
-                        keys="pred",
-                        transform=self.transforms,
-                        orig_keys="image",
-                        meta_keys="pred_meta_dict",
-                        nearest_interp=False,
-                        to_tensor=True,
-                    )
-                    probs = [
-                        inverter(x)["pred"] for x in decollate_batch(batch_data)
-                    ]  # invert resampling if any
-                    probs = torch.stack(probs, dim=0)
-                    # print('inverted resampling', logits.shape)
+                probs = torch.softmax(logits.float(), dim=1)
 
-                    all_probs.append(probs.cpu())
+                batch_data["pred"] = probs
+                inverter = Invertd(
+                    keys="pred",
+                    transform=self.transforms,
+                    orig_keys="image",
+                    meta_keys="pred_meta_dict",
+                    nearest_interp=False,
+                    to_tensor=True,
+                )
+                probs = [
+                    inverter(x)["pred"] for x in decollate_batch(batch_data)
+                ]  # invert resampling if any
+                probs = torch.stack(probs, dim=0)
+                # print('inverted resampling', logits.shape)
 
-                probs = sum(all_probs) / len(all_probs)  # mean
-                labels = torch.argmax(probs, dim=1).cpu().numpy().astype(np.int8)
+                all_probs.append(probs.cpu())
 
-                prediction = labels[0].copy()
+            avg_probs = torch.mean(torch.stack(all_probs), dim=0)
+            labels = torch.argmax(avg_probs, dim=1).cpu().numpy().astype(np.int8)
 
-        prediction = prediction.transpose((2, 1, 0))
+            prediction = labels[0].copy()
 
-        return prediction.astype(int)
+            prediction = prediction.transpose((2, 1, 0))
+
+            return prediction.astype(int)
