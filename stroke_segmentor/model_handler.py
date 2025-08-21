@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from contextlib import nullcontext
 from pathlib import Path
 from typing import Any, Dict, List, Union
 
@@ -28,17 +29,19 @@ from stroke_segmentor.zenodo import fetch_weights
 class ModelHandler:
     """Class for model loading, inference and post processing"""
 
-    def __init__(self, device: str):
+    def __init__(self, force_cpu: bool = False):
         """Initialize the ModelHandler class.
 
         Args:
-            device (str): Device to use for inference.
+            force_cpu (bool): Whether to force the use of CPU for inference.
 
         Returns:
             ModelHandler: ModelHandler instance.
         """
 
-        self.device = torch.device(device)
+        self.device = torch.device(
+            "cuda" if torch.cuda.is_available() and not force_cpu else "cpu"
+        )
         # get location of model weights
         self.model_weights_folder = fetch_weights()
         self.checkpoints = [
@@ -121,19 +124,20 @@ class ModelHandler:
 
         with torch.no_grad():
             batch_data: Dict[str, Any] = next(iter(dataloader))
-            image = batch_data["image"].cuda(0)
+            image = batch_data["image"].to(self.device)
 
             all_probs = []
             for checkpoint in self.checkpoints:
 
-                model = torch.jit.load(checkpoint)
-                model.cuda(0)
+                model = torch.jit.load(checkpoint).to(self.device)
                 model.eval()
 
-                with autocast("cuda", enabled=True):
+                with (
+                    autocast("cuda", enabled=True)
+                    if self.device.type == "cuda"
+                    else nullcontext()
+                ):
                     logits = model_inferer(inputs=image, network=model)
-
-                assert isinstance(logits, torch.Tensor)
 
                 probs = torch.softmax(logits.float(), dim=1)
 

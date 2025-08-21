@@ -14,10 +14,9 @@ class Inferer:
 
     def __init__(
         self,
+        force_cpu: bool = False,
     ):
-        self.model_weights_folder = ""
-        self.device = "cuda"
-        self.model_handler = ModelHandler(device=self.device)
+        self.model_handler = ModelHandler(force_cpu=force_cpu)
 
     def _save(
         self,
