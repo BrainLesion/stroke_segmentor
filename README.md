@@ -36,11 +36,13 @@ pred = inferer.infer(
 
 ## Citation
 
-`stroke_segmentor` is part of the [BrainLesion](https://github.com/BrainLesion) suite.  
-Please cite it support the development!  
-https://github.com/BrainLesion#-citing-brainlesion-suite
+> [!IMPORTANT]
+> `stroke_segmentor` is part of the [BrainLesion](https://github.com/BrainLesion) suite.  
+> Please cite it support the development!  
+> https://github.com/BrainLesion#-citing-brainlesion-suite
 
- > TODO: citations for deep isles and NVAUTO
+ This project is based on [DeepISLES](https://github.com/ezequieldlrosa/DeepIsles) and offers its NVAUTO algorithm.
+ Please cite the [original manuscript](https://github.com/ezequieldlrosa/DeepIsles?tab=readme-ov-file#citations).
 
 ## Contributing
 
