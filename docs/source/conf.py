@@ -17,7 +17,7 @@ run(["python", "preprocess_readme.py"])
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "stroke_segmentor"
-copyright = "2024, Marcel Rosier et al."
+copyright = "2025, Marcel Rosier et al."
 author = "Marcel Rosier, Florian Kofler"
 
 # -- General configuration ---------------------------------------------------
