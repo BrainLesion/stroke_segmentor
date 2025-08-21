@@ -154,7 +154,6 @@ class ModelHandler:
                     inverter(x)["pred"] for x in decollate_batch(batch_data)
                 ]  # invert resampling if any
                 probs = torch.stack(probs, dim=0)
-                # print('inverted resampling', logits.shape)
 
                 all_probs.append(probs.cpu())
 

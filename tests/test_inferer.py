@@ -1,8 +1,6 @@
 import numpy as np
 import pytest
-from pathlib import Path
 
-import SimpleITK
 from stroke_segmentor.inferer import Inferer
 
 
