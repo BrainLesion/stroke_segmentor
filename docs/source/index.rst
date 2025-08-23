@@ -1,4 +1,4 @@
-PACKAGE_NAME documentation
+stroke_segmentor documentation
 ===================
 
 .. include:: ../README_preprocessed.md
@@ -19,4 +19,7 @@ Sections
 .. toctree::
    :maxdepth: 2
    :caption: API Reference:
+
+   inferer
+   model_handler
 
