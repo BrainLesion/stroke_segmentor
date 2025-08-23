@@ -1,5 +1,5 @@
 stroke_segmentor documentation
-======================================
+==============================
 
 .. include:: ../README_preprocessed.md
    :parser: myst_parser.sphinx_
