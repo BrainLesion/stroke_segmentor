@@ -11,6 +11,19 @@ from stroke_segmentor.model_handler import ModelHandler
 
 
 class Inferer:
+    """
+    Handles inference for stroke segmentation using DWI and ADC images.
+    This class wraps a model handler to perform inference on given images and can optionally
+    save the resulting segmentation mask to disk.
+
+    Basic usage:
+    ```
+    .. code-block:: python
+
+    inferer = Inferer()
+    prediction = inferer.infer(adc_path, dwi_path, segmentation_path)
+    ```
+    """
 
     def __init__(
         self,

@@ -158,10 +158,10 @@ class ModelHandler:
                 all_probs.append(probs.cpu())
 
             avg_probs = torch.mean(torch.stack(all_probs), dim=0)
-            labels = torch.argmax(avg_probs, dim=1).cpu().numpy().astype(np.int8)
+            labels = torch.argmax(avg_probs, dim=1).cpu().numpy()
 
             prediction = labels[0].copy()
 
             prediction = prediction.transpose((2, 1, 0))
 
-            return prediction.astype(int)
+            return prediction.astype(np.int8)
