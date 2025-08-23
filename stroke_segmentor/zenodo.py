@@ -19,7 +19,7 @@ def fetch_weights() -> Path:
     Ensure that the required weights are available locally, downloading them if necessary.
 
     Returns:
-        Path: The path to the folder containing the atlases.
+        Path: The path to the folder containing the model weights.
     """
     record = ZenodoRecord(
         record_id=WEIGHTS_RECORD_ID,
