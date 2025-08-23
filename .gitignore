@@ -163,5 +163,6 @@ testdata
 NVAUTO
 *.nii.gz
 *.ipynb
+.vscode
 
 stroke_segmentor/weights
