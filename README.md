@@ -12,7 +12,7 @@ State-of-the-art ischemic stroke lesion segmentation in MRI
 
 ## Installation
 
-With a Python 3.8+ environment, you can install `stroke_segmentor` directly from [PyPI](https://pypi.org/project/stroke_segmentor/):
+With a Python 3.9+ environment, you can install `stroke_segmentor` directly from [PyPI](https://pypi.org/project/stroke_segmentor/):
 
 ```bash
 pip install stroke_segmentor
