@@ -52,7 +52,7 @@ def citation_reminder(func):
             )
             console.rule()
             console.line()
-            os.environ["PANOPTICA_CITATION_REMINDER"] = "false"  # Show only once
+            os.environ["STROKE_SEGMENTOR_CITATION_REMINDER"] = "false"  # Show only once
         return func(*args, **kwargs)
 
     return wrapper
