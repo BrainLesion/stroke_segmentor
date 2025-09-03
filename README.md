@@ -28,8 +28,8 @@ from stroke_segmentor.inferer import Inferer
 
 inferer = Inferer()
 pred = inferer.infer(
-    dwi_path="path/to/dwi.nii.gz",
     adc_path="path/to/adc.nii.gz",
+    dwi_path="path/to/dwi.nii.gz",
     segmentation_path="seg.nii.gz", # optional. the numpy array is always returned for direct usage
 )
 ```
