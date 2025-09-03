@@ -34,12 +34,22 @@ pred = inferer.infer(
 )
 ```
 
+## Logging
+By default our package is silent, although we do use logging under the hood.  
+If you want, you can enable it like this:
+```py
+from loguru import logger
+
+logger.enable("stroke_segmentor")
+```
+
+
 ## Citation
 
 > [!IMPORTANT]
 > `stroke_segmentor` is based on [DeepISLES](https://github.com/ezequieldlrosa/DeepIsles) and offers its NVAUTO algorithm
 > as part of the [BrainLesion](https://github.com/BrainLesion) suite.  
-> Please cite all relevant mansucripts!  
+> Please cite all relevant manuscripts!  
 
 
 ### DeepISLES
