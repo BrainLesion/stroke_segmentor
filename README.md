@@ -37,12 +37,50 @@ pred = inferer.infer(
 ## Citation
 
 > [!IMPORTANT]
-> `stroke_segmentor` is part of the [BrainLesion](https://github.com/BrainLesion) suite.  
-> Please cite it support the development!  
-> https://github.com/BrainLesion#-citing-brainlesion-suite
+> `stroke_segmentor` is based on [DeepISLES](https://github.com/ezequieldlrosa/DeepIsles) and offers its NVAUTO algorithm
+> as part of the [BrainLesion](https://github.com/BrainLesion) suite.  
+> Please cite all relevant mansucripts!  
 
- This project is based on [DeepISLES](https://github.com/ezequieldlrosa/DeepIsles) and offers its NVAUTO algorithm.
- Please cite the [original manuscript](https://github.com/ezequieldlrosa/DeepIsles?tab=readme-ov-file#citations).
+
+### DeepISLES
+> de la Rosa, Ezequiel, et al. "DeepISLES: a clinically validated ischemic stroke segmentation model from the ISLES'22 challenge." Nature Communications 16.1 (2025): 7357.
+```
+
+@article{de2025deepisles,
+  title={DeepISLES: a clinically validated ischemic stroke segmentation model from the ISLES'22 challenge},
+  author={de la Rosa, Ezequiel and Reyes, Mauricio and Liew, Sook-Lei and Hutton, Alexandre and Wiest, Roland and Kaesmacher, Johannes and Hanning, Uta and Hakim, Arsany and Zubal, Richard and Valenzuela, Waldo and others},
+  journal={Nature Communications},
+  volume={16},
+  number={1},
+  pages={7357},
+  year={2025},
+  publisher={Nature Publishing Group UK London}
+}
+```
+
+### BrainLesion Suite
+> Kofler, F., Rosier, M., Astaraki, M., Möller, H., Mekki, I. I., Buchner, J. A., ... & Menze, B. (2025). BrainLesion Suite: A Flexible and User-Friendly Framework for Modular Brain Lesion Image Analysis. arXiv preprint arXiv:2507.09036.
+```
+
+@article{kofler2025brainlesion,
+  title={BrainLesion Suite: A Flexible and User-Friendly Framework for Modular Brain Lesion Image Analysis},
+  author={Kofler, Florian and Rosier, Marcel and Astaraki, Mehdi and M{\"o}ller, Hendrik and Mekki, Ilhem Isra and Buchner, Josef A and Schmick, Anton and Pfiffer, Arianna and Oswald, Eva and Zimmer, Lucas and others},
+  journal={arXiv preprint arXiv:2507.09036},
+  year={2025}
+}
+```
+
+### NVAUTO Algorithm
+>Siddique, M. M. R., Yang, D., He, Y., Xu, D., & Myronenko, A. (2022). Automated ischemic stroke lesion segmentation from 3D MRI. arXiv preprint arXiv:2209.09546.
+```
+@article{siddique2022automated,
+  title={Automated ischemic stroke lesion segmentation from 3D MRI},
+  author={Siddique, Md Mahfuzur Rahman and Yang, Dong and He, Yufan and Xu, Daguang and Myronenko, Andriy},
+  journal={arXiv preprint arXiv:2209.09546},
+  year={2022}
+}
+```
+
 
 ## Contributing
 
