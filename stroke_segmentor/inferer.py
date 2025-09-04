@@ -8,6 +8,7 @@ import SimpleITK
 from numpy.typing import NDArray
 
 from stroke_segmentor.model_handler import ModelHandler
+from stroke_segmentor.utils.citation_reminder import citation_reminder
 
 
 class Inferer:
@@ -57,6 +58,7 @@ class Inferer:
         Path(segmentation_path).parent.mkdir(parents=True, exist_ok=True)
         SimpleITK.WriteImage(output_image, str(segmentation_path))
 
+    @citation_reminder
     def infer(
         self,
         adc_path: Union[str, Path],

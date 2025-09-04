@@ -176,6 +176,7 @@ class ZenodoRecord:
 
         with zipfile.ZipFile(buffer) as z:
             z.extractall(folder)
+            logger.info(f"Extracted data to {folder}")
 
         for file in folder.iterdir():
             if file.is_file() and file.suffix == ".zip":
